@@ -68,7 +68,7 @@ class SequelizeTypeScriptModel {
           /**
            * ${rd3[2]}
            */
-          ${rd3[0]}${rd3[1]}`);
+          ${rd3[0]} = ${rd3[1]}`);
     }
     const estr = enums.join(',').toString();
     console.log(estr);
