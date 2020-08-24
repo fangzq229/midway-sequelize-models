@@ -19,16 +19,16 @@ function createWindow() {
   if (process.platform === 'darwin') {
     const template = [
       {
-        label: "Application",
+        label: 'Application',
         submenu: [
-          { label: "Quit", accelerator: "Command+Q", click: function () { app.quit(); } }
+          { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit(); } }
         ]
       },
       {
-        label: "Edit",
+        label: 'Edit',
         submenu: [
-          { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-          { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+          { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+          { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' }
         ]
       }
     ];
