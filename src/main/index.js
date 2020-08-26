@@ -17,20 +17,28 @@ const winURL = process.env.NODE_ENV === 'development'
 
 function createWindow() {
   if (process.platform === 'darwin') {
-    template.unshift({
-      label: 'Edit',
-      submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { role: 'pasteandmatchstyle' },
-        { role: 'delete' },
-        { role: 'selectall' }
-      ]
-    })
+    const template = [
+      {
+        label: 'Application',
+        submenu: [
+          { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit(); } }
+        ]
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          { role: 'undo' },
+          { role: 'redo' },
+          { type: 'separator' },
+          { role: 'cut' },
+          { role: 'copy' },
+          { role: 'paste' },
+          { role: 'pasteandmatchstyle' },
+          { role: 'delete' },
+          { role: 'selectall' }
+        ]
+      }
+    ];
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
   } else {
     Menu.setApplicationMenu(null)
