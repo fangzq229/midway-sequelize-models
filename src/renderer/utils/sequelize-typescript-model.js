@@ -81,6 +81,7 @@ ${estr}
     switch (element.DATA_TYPE) {
       case 'nvarchar':
       case 'char':
+      case 'text':
       case 'varchar':
         return 'STRING';
       case 'datetime':
@@ -147,7 +148,7 @@ ${estr}
       });
     const iType = typeGroup.length > 0 && `import {${typeGroup.join(',').toString()}} from 'sequelize';`;
 
-    return `import { providerWrapper } from 'midway';
+    return `import { providerWrapper } from '@midwayjs/core';
 import { Table, Column } from 'sequelize-typescript';
 import { BaseModel } from '../../base/base.model';
 ${iType || ''}
@@ -173,7 +174,7 @@ export class Const${inflect.camelize(this.elitem.TABLE_NAME)} {
   export const factory = () => ${inflect.camelize(this.elitem.TABLE_NAME)}Model;
 providerWrapper([
   {
-    id: '${inflect.camelize(this.elitem.TABLE_NAME)}Model',
+    id: '${inflect.camelize(this.elitem.TABLE_NAME, false)}Model',
     provider: factory
   }
 ]);
