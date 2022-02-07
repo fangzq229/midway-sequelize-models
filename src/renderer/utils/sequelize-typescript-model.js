@@ -11,6 +11,7 @@ class SequelizeTypeScriptModel {
     switch (element.DATA_TYPE) {
       case 'nvarchar':
       case 'varchar':
+      case 'text':
         return 'string';
       case 'datetime':
         return `Date`;
@@ -71,7 +72,6 @@ class SequelizeTypeScriptModel {
           ${rd3[0]} = ${rd3[1]}`);
     }
     const estr = enums.join(',').toString();
-    console.log(estr);
     return estr ? `\r\nexport enum E${inflect.camelize(element.COLUMN_NAME, true)} {
 ${estr}
     }` : '';
@@ -130,7 +130,7 @@ ${estr}
         const typeString = this.findTypeTxt(element);
         const colEnum = this.findEnum(element);
         const mastType = !colEnum ? typeString : `E${inflect.camelize(element.COLUMN_NAME, true)}`;
-        const colType = mastType !== typeString && this.findAttrType(element);
+        const colType = this.findAttrType(element);
         colType && !typeGroup.includes(colType) && typeGroup.push(colType);
         const colTypestr = colType && ` ,type: ${colType}`;
         // #region col
@@ -146,19 +146,16 @@ ${estr}
         tenum += `${colEnum}`;
         // #endregion
       });
-    const iType = typeGroup.length > 0 && `import {${typeGroup.join(',').toString()}} from 'sequelize';`;
+    const iType = typeGroup.length > 0 && `import {  BaseTable, ${typeGroup.join(',').toString()}} from 'midway3-sequelize';`;
 
-    return `import { providerWrapper } from '@midwayjs/core';
-import { Table, Column } from 'sequelize-typescript';
-import { BaseModel } from '../../base/base.model';
+    return `
+    import { Column } from 'sequelize-typescript';
+import { BaseModel } from '../base/base.model';
 ${iType || ''}
 // #region enum${tenum ? `\r\n` + tenum : ''}
 // #endregion
 
-// 依赖注入用导出类型
-export type I${inflect.camelize(this.elitem.TABLE_NAME)}Model = typeof ${inflect.camelize(this.elitem.TABLE_NAME)}Model;
-
-@Table({
+@BaseTable({
   tableName: '${this.elitem.TABLE_NAME}'
 })
 export class ${inflect.camelize(this.elitem.TABLE_NAME)}Model extends BaseModel {
@@ -168,17 +165,7 @@ export class ${inflect.camelize(this.elitem.TABLE_NAME)}Model extends BaseModel 
 // 常量生成
 export class Const${inflect.camelize(this.elitem.TABLE_NAME)} {
   ${this.findConst()}
-}
-
-  // @provide 用 工厂模式static model
-  export const factory = () => ${inflect.camelize(this.elitem.TABLE_NAME)}Model;
-providerWrapper([
-  {
-    id: '${inflect.camelize(this.elitem.TABLE_NAME, false)}Model',
-    provider: factory
-  }
-]);
-`;
+}`;
   }
 
   findInterface() {

@@ -21,8 +21,8 @@
 
     <div class="right-box">
       <div class="right-top">
-        <div @click="createInterface" class="btn create-interface">TsInterface</div>
-        <div @click="createSchemas" class="btn create-schemas">JoiSchemas</div>
+        <!-- <div @click="createInterface" class="btn create-interface">TsInterface</div>
+        <div @click="createSchemas" class="btn create-schemas">JoiSchemas</div> -->
         <div @click="createModel" class="btn create-models">TsModels</div>
       </div>
       <div class="right-table">
