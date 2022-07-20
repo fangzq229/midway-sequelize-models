@@ -26,7 +26,9 @@
         <div @click="createModel" class="btn create-models">TsModels</div>
       </div>
       <div class="right-table">
-        <div class="table-name">SELECT TABLE：{{ this.actionTable.TABLE_NAME }}</div>
+        <div class="table-name">
+          SELECT TABLE：{{ this.actionTable.TABLE_NAME }}
+        </div>
         <table border="1" cellpadding="0" cellspacing="0">
           <tr>
             <th>字段名</th>
@@ -36,11 +38,11 @@
             <th>长度</th>
           </tr>
           <tr v-for="item in columnData" :key="item.id">
-            <td>{{item.COLUMN_NAME}}</td>
-            <td>{{item.COLUMN_COMMENT}}</td>
-            <td>{{item.IS_NULLABLE}}</td>
-            <td>{{item.DATA_TYPE}}</td>
-            <td>{{item.CHARACTER_MAXIMUM_LENGTH}}</td>
+            <td>{{ item.COLUMN_NAME }}</td>
+            <td>{{ item.COLUMN_COMMENT }}</td>
+            <td>{{ item.IS_NULLABLE }}</td>
+            <td>{{ item.DATA_TYPE }}</td>
+            <td>{{ item.CHARACTER_MAXIMUM_LENGTH }}</td>
           </tr>
         </table>
       </div>
@@ -71,6 +73,7 @@ export default {
     this.tables = result;
   },
   methods: {
+
     async actionItem(index) {
       this.actionIdx = index;
       this.actionTable = this.tables[index];

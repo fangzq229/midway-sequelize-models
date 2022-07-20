@@ -4,7 +4,9 @@
       <div
         :class="actionIdx === -1 ? `left-title action` : `left-title`"
         @click="initItem"
-      >Sequelize Models</div>
+      >
+        Sequelize Models
+      </div>
       <div class="left-con" :key="k">
         <div class="left-con-tle">FAVORITES</div>
         <div
@@ -29,11 +31,21 @@
         </div>
         <div class="input">
           <label>name：</label>
-          <input type="text" v-model="paramObj.name" value placeholder="输入name" />
+          <input
+            type="text"
+            v-model="paramObj.name"
+            value
+            placeholder="输入name"
+          />
         </div>
         <div class="input">
           <label>host：</label>
-          <input type="text" v-model="paramObj.host" value placeholder="输入host" />
+          <input
+            type="text"
+            v-model="paramObj.host"
+            value
+            placeholder="输入host"
+          />
         </div>
         <div class="input">
           <label>port：</label>
@@ -45,16 +57,27 @@
         </div>
         <div class="input">
           <label>password：</label>
-          <input type="password" v-model="paramObj.password" placeholder="输入password" />
+          <input
+            type="password"
+            v-model="paramObj.password"
+            placeholder="输入password"
+          />
         </div>
         <div class="input">
           <label>database：</label>
-          <input type="text" v-model="paramObj.database" placeholder="输入database" />
+          <input
+            type="text"
+            v-model="paramObj.database"
+            placeholder="输入database"
+          />
         </div>
       </div>
       <div class="r-footer">
-        <div class="favorite" @click="addItem" v-if="actionIdx < 0">Add to Favorite</div>
+        <div class="favorite" @click="addItem" v-if="actionIdx < 0">
+          Add to Favorite
+        </div>
         <div class="changes" @click="saveItem" v-else>Save Changes</div>
+        <div class="connect" @click="jsonToDto">Json To Dto</div>
         <div class="connect" @click="connect">Connect</div>
       </div>
     </div>
@@ -91,6 +114,11 @@ export default {
     }
   },
   methods: {
+    jsonToDto() {
+      this.$router.push({
+        path: 'json-to-dto'
+      })
+    },
     selectItem(index) {
       this.actionIdx = index;
       localStorage.setItem('actionIdx', index);

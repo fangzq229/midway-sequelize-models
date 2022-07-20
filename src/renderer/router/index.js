@@ -18,6 +18,11 @@ export default new Router({
       path: '/tables',
       name: 'tables',
       component: require('@/views/tables').default
+    },
+    {
+      path: '/json-to-dto',
+      name: 'jsonToDto',
+      component: require('@/views/json-to-dto').default
     }
   ]
 })
